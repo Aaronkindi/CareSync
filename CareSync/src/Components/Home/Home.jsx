@@ -68,7 +68,7 @@ export const Home = () => {
         )}
 
         {/* Main Content */}
-        <div className="flex-grow flex flex-col items-start justify-center text-left px-4 sm:px-8 md:px-[100px] pt-4">
+        <div className="flex-grow flex flex-col items-start justify-center text-left px-4 sm:px-8 md:px-[100px] ">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-medium mb-4 tracking-wider text-black">
             CareSync
           </h1>
