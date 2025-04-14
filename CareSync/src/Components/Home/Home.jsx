@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import bgImage from "../assets/images/bgImg.jpg";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,7 +87,7 @@ export const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-2">
             <button className="bg-white text-black py-2 px-8 sm:px-10 rounded-[20px] hover:bg-green-500 transition duration-300 mt-4 ml-1 sm:ml-3">
-              Login
+              <Link to="/login">Login</Link>
             </button>
             <button className="bg-gray-500/10 backdrop-blur-md text-white py-2 px-8 sm:px-10 rounded-[20px] hover:bg-green-500 transition duration-300 mt-2 sm:mt-4 ml-1 sm:ml-3">
               Learn More
