@@ -1,8 +1,7 @@
 import React from "react";
 import bgImage from "../assets/images/bgImg.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import doctorImg from "../assets/images/doctor.jpg";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const Login = () => {
@@ -20,17 +19,28 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/login", formData);
-      alert("User Loggedin!");
-      // Redirect to dashboard page after successful login
-      navigate("/dashboard"); // Redirect to dashboard page after successful login
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        formData
+      );
+
+      // ✅ Extract token and user data from response
+      const { token, user } = response.data;
+
+      // ✅ Save JWT token and user info to localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      alert("User Logged in!");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Login error", error);
+      alert("Login failed. Please check your credentials.");
     }
   };
+
   return (
     <div className="relative h-screen">
-      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
@@ -38,13 +48,10 @@ export const Login = () => {
         }}
       />
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-40 z-0" />
 
-      {/* Content Container */}
       <div className="relative z-10 flex h-full items-center justify-center px-4 max-w-3xl pl-3 ml-[300px]">
         <div className="bg-grey/60 backdrop-blur-md rounded-xl shadow-xl w-full max-w-5xl flex">
-          {/* Form Section */}
           <div className="w-1/2 p-10 flex flex-col justify-center">
             <h2 className="text-2xl font-bold text-gray-800 text-center">
               Sign in
@@ -85,7 +92,6 @@ export const Login = () => {
             </p>
           </div>
 
-          {/* Image Section */}
           <div className="w-1/2">
             <img
               src={doctorImg}
